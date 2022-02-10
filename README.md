@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Git workflow
+
+1. Checkout new branch: git checkout -b <branch_name>
+2. Push to the branch: git push origin <branch_name>
+3. When all code in the branch works fine, checkout to master: git checkout master .
+4. Then merge to master: git merge <branch_name>
+
 ## Available Scripts
 
 In the project directory, you can run:
