@@ -1,0 +1,27 @@
+.home-header-container {
+  height: 70px;
+  border: 1px solid red;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  // font-family: proxima-nova, sans-serif;
+
+  .home-header-content {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    .left-content {
+      width: 30%;
+    }
+
+    .center-content {
+      width: 40%;
+    }
+
+    .right-content {
+      width: 30%;
+    }
+  }
+}
