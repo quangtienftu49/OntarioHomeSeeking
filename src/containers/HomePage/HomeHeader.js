@@ -9,9 +9,9 @@ class HomeHeader extends Component {
         <div className="home-header-content">
           <div className="left-content">
             <div className="logo-container">
-              <i class="fas fa-home"></i>
-              <div className="home-listing">Home Listing</div>
+              <i class="fas fa-home">Ontario Home Seeking</i>
             </div>
+            <div className="home-listing">Home Listing</div>
           </div>
           <div className="center-content"></div>
           <div className="right-content">
