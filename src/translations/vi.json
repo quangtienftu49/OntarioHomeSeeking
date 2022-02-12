@@ -27,12 +27,12 @@
     },
     "menu": {
         "system": {
-            "header": "Hệ thống",
+            "header": "System",
             "system-administrator": {
-                "header": "Quản trị hệ thống",
-                "user-manage": "Quản lý người sử dụng",
-                "product-manage": "Quản lý gói",
-                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
+                "header": "Manage system",
+                "user-manage": "Mange users",
+                "product-manage": "Manage packages",
+                "register-package-group-or-account": "Manage services"
             },
             "system-parameter": {
                 "header": "Tham số hệ thống"

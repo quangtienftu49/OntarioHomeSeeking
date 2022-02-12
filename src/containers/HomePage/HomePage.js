@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HomeHeader from "./HomeHeader";
-import "./HomePage.scss";
 
 class HomePage extends Component {
   render() {
