@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 // import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-// import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from "../../../utils";
+import { CommonUtils } from "../../../utils";
 import * as actions from "../../../store/actions";
 import "./HomeListingRedux.scss";
-// import Lightbox from "react-image-lightbox";
-// import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
 // import TableManageUser from "./TableManageUser";
 import Select from "react-select";
 
@@ -22,6 +22,9 @@ class HomeListingRedux extends Component {
       selectedOption: "",
       allCities: [],
       hasOldData: false,
+      previewImgUrl: "",
+      image: "",
+      isOpen: false,
     };
   }
 
@@ -79,9 +82,31 @@ class HomeListingRedux extends Component {
     });
   };
 
-  handleOnChangeImage = () => {};
+  handleOnChangeImage = async (e) => {
+    let data = e.target.files;
+    let file = data[0];
+    // console.log("check file 0", file);
+    //create URL to preview image
+    if (file) {
+      //convert file image to base64
+      let base64 = await CommonUtils.getBase64(file);
+      // console.log("check file base64", base64);
+      let objectUrl = URL.createObjectURL(file);
+      this.setState({
+        previewImgUrl: objectUrl,
+        image: base64,
+      });
+    }
+  };
 
-  openPreviewImage = () => {};
+  openPreviewImage = () => {
+    if (!this.state.previewImgUrl) {
+      return;
+    }
+    this.setState({
+      isOpen: true,
+    });
+  };
 
   handleChangeSelect = async (selectedOption) => {
     this.setState({ selectedOption });
@@ -118,7 +143,7 @@ class HomeListingRedux extends Component {
   };
 
   render() {
-    console.log("check state", this.state);
+    // console.log("check state", this.state);
     return (
       <div className="user-redux-container">
         <div className="title">Create a home listing</div>
@@ -204,9 +229,9 @@ class HomeListingRedux extends Component {
                   </label>
                   <div
                     className="preview-image"
-                    // style={{
-                    //   backgroundImage: `url(${this.state.previewImgUrl})`,
-                    // }}
+                    style={{
+                      backgroundImage: `url(${this.state.previewImgUrl})`,
+                    }}
                     onClick={() => {
                       this.openPreviewImage();
                     }}
@@ -234,6 +259,12 @@ class HomeListingRedux extends Component {
             </div>
           </div>
         </div>
+        {this.state.isOpen === true && (
+          <Lightbox
+            mainSrc={this.state.previewImgUrl}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+          />
+        )}
       </div>
     );
   }

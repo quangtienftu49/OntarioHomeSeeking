@@ -43,7 +43,7 @@ export const saveHomelistingAction = (data) => {
   return async (dispatch, getState) => {
     try {
       let res = await saveHomelisting(data);
-      console.log("check res", res);
+      //   console.log("check res", res);
       if (res && res.errCode === 0) {
         toast.success("Save a home listing successfully!");
         dispatch({
