@@ -79,6 +79,7 @@ class HomeListingRedux extends Component {
       phoneNumber: this.state.phoneNumber,
       userId: this.state.userId,
       cityId: this.state.selectedOption.value,
+      image: this.state.image,
     });
   };
 
@@ -112,38 +113,19 @@ class HomeListingRedux extends Component {
     this.setState({ selectedOption });
   };
 
-  handleOnChangeAddress = (e) => {
-    this.setState({
-      address: e.target.value,
-    });
-  };
+  onChangeInput = (e, id) => {
+    let copyState = { ...this.state };
+    copyState[id] = e.target.value;
 
-  handleOnChangeProvince = (e) => {
     this.setState({
-      province: e.target.value,
-    });
-  };
-
-  handleOnChangePhoneNumber = (e) => {
-    this.setState({
-      phoneNumber: e.target.value,
-    });
-  };
-
-  handleOnChangePrice = (e) => {
-    this.setState({
-      price: e.target.value,
-    });
-  };
-
-  handleOnChangeDescription = (e) => {
-    this.setState({
-      description: e.target.value,
+      ...copyState,
     });
   };
 
   render() {
     // console.log("check state", this.state);
+
+    let { price, address, description, phoneNumber, province } = this.state;
     return (
       <div className="user-redux-container">
         <div className="title">Create a home listing</div>
@@ -153,12 +135,12 @@ class HomeListingRedux extends Component {
               <div className="col-6 mt-3">
                 <label>Address</label>
                 <input
+                  type="address"
                   className="form-control"
-                  type="text"
+                  value={address}
                   onChange={(e) => {
-                    this.handleOnChangeAddress(e);
+                    this.onChangeInput(e, "address");
                   }}
-                  value={this.state.address}
                 ></input>
               </div>
               <div className="col-3 mt-3">
@@ -172,45 +154,46 @@ class HomeListingRedux extends Component {
               <div className="col-3 mt-3">
                 <label>Province</label>
                 <input
+                  type="province"
                   className="form-control"
-                  type="text"
+                  value={province}
                   onChange={(e) => {
-                    this.handleOnChangeProvince(e);
+                    this.onChangeInput(e, "province");
                   }}
-                  value={this.state.province}
                 ></input>
               </div>
               <div className="col-4 mt-3">
                 <label>Phone Number</label>
                 <input
+                  type="phoneNumber"
                   className="form-control"
-                  type="tel"
+                  value={phoneNumber}
                   onChange={(e) => {
-                    this.handleOnChangePhoneNumber(e);
+                    this.onChangeInput(e, "phoneNumber");
                   }}
-                  value={this.state.phoneNumber}
                 ></input>
               </div>
               <div className="col-4 mt-3">
                 <label>Price</label>
                 <input
+                  type="price"
                   className="form-control"
-                  type="text"
+                  value={price}
                   onChange={(e) => {
-                    this.handleOnChangePrice(e);
+                    this.onChangeInput(e, "price");
                   }}
-                  value={this.state.price}
                 ></input>
               </div>
               <div className="col-6 mt-3">
                 <label>Description</label>
                 <textarea
-                  className="form-control"
                   rows="6"
+                  type="description"
+                  className="form-control"
+                  value={description}
                   onChange={(e) => {
-                    this.handleOnChangeDescription(e);
+                    this.onChangeInput(e, "description");
                   }}
-                  value={this.state.description}
                 ></textarea>
               </div>
               <div className="col-6 mt-3">
