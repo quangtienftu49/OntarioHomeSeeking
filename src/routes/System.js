@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import UserManage from "../containers/System/UserManage";
-import HomeListing from "../containers/System/User/HomeListing";
+import HomeListingRedux from "../containers/System/User/HomeListingRedux";
 // import Header from "../containers/Header/Header";
 
 class System extends Component {
@@ -15,7 +15,10 @@ class System extends Component {
           <div className="system-list">
             <Switch>
               <Route path="/system/user-manage" component={UserManage} />
-              <Route path="/system/homelisting-redux" component={HomeListing} />
+              <Route
+                path="/system/homelisting-redux"
+                component={HomeListingRedux}
+              />
               <Route
                 component={() => {
                   return <Redirect to={systemMenuPath} />;

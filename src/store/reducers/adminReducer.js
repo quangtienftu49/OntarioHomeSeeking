@@ -1,33 +1,26 @@
-import actionTypes from '../actions/actionTypes';
+import actionTypes from "../actions/actionTypes";
 
 const initialState = {
-    isLoggedIn: false,
-    adminInfo: null
-}
+  allCities: [],
+};
 
-const appReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case actionTypes.ADMIN_LOGIN_SUCCESS:
-            return {
-                ...state,
-                isLoggedIn: true,
-                adminInfo: action.adminInfo
-            }
-        case actionTypes.ADMIN_LOGIN_FAIL:
-            return {
-                ...state,
-                isLoggedIn: false,
-                adminInfo: null
-            }
-        case actionTypes.PROCESS_LOGOUT:
-            return {
-                ...state,
-                isLoggedIn: false,
-                adminInfo: null
-            }
-        default:
-            return state;
-    }
-}
+const adminReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actionTypes.FETCH_ALL_CITIES_SUCCESS:
+      state.allCities = action.allCities;
+      return {
+        ...state,
+      };
 
-export default appReducer;
+    case actionTypes.FETCH_ALL_CITIES_FAILED:
+      state.allCities = [];
+      return {
+        ...state,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default adminReducer;

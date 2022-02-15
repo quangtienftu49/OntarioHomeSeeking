@@ -3,22 +3,59 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from "../../../utils";
 import * as actions from "../../../store/actions";
-import "./HomeListing.scss";
+import "./HomeListingRedux.scss";
 // import Lightbox from "react-image-lightbox";
 // import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
 // import TableManageUser from "./TableManageUser";
+import Select from "react-select";
 
-class HomeListing extends Component {
+class HomeListingRedux extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedOption: "",
+      allCities: [],
+    };
+  }
+
+  componentDidMount() {
+    this.props.fetchAllCities();
+  }
+
+  buildDataInputSelect = (inputData) => {
+    let result = [];
+    if (inputData && inputData.length > 0) {
+      inputData.map((item, index) => {
+        let object = {};
+        object.label = item.city;
+        object.value = item.id;
+
+        result.push(object);
+      });
+    }
+
+    return result;
+  };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.allCities !== this.props.allCities) {
+      let dataSelect = this.buildDataInputSelect(this.props.allCities);
+      this.setState({
+        allCities: dataSelect,
+      });
+    }
   }
 
   handleOnChangeImage = () => {};
 
   openPreviewImage = () => {};
 
+  handleChangeSelect = async (selectedOption) => {
+    this.setState({ selectedOption });
+  };
+
   render() {
+    console.log("check state", this.state);
     return (
       <div className="user-redux-container">
         <div className="title">Create a home listing</div>
@@ -31,10 +68,11 @@ class HomeListing extends Component {
               </div>
               <div className="col-3 mt-3">
                 <label>City</label>
-                <select className="form-control">
-                  <option selected>Choose...</option>
-                  <option>....</option>
-                </select>
+                <Select
+                  value={this.state.selectedOption}
+                  onChange={this.handleChangeSelect}
+                  options={this.state.allCities}
+                />
               </div>
               <div className="col-3 mt-3">
                 <label>Province</label>
@@ -90,7 +128,7 @@ class HomeListing extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // language: state.app.language,
+    allCities: state.admin.allCities,
     // genderRedux: state.admin.genders,
     // titleRedux: state.admin.titles,
     // roleRedux: state.admin.roles,
@@ -101,7 +139,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // getGenderStart: () => dispatch(actions.fetchGenderStart()),
+    fetchAllCities: () => dispatch(actions.fetchAllCities()),
     // getTitleStart: () => dispatch(actions.fetchTitleStart()),
     // getRoleStart: () => dispatch(actions.fetchRoleStart()),
     // createNewUser: (data) => dispatch(actions.createNewUser(data)),
@@ -113,4 +151,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeListing);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeListingRedux);
