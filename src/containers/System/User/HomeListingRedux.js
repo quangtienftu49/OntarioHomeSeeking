@@ -21,6 +21,7 @@ class HomeListingRedux extends Component {
       province: "",
       selectedOption: "",
       allCities: [],
+      hasOldData: false,
     };
   }
 
@@ -51,6 +52,19 @@ class HomeListingRedux extends Component {
       });
     }
   }
+
+  handleClearHomelisting = () => {
+    this.setState({
+      price: "",
+      address: "",
+      description: "",
+      phoneNumber: "",
+      userId: "",
+      province: "",
+      allCities: [],
+      selectedOption: "",
+    });
+  };
 
   handleSaveHomelisting = () => {
     this.props.saveHomelisting({
@@ -199,12 +213,20 @@ class HomeListingRedux extends Component {
               </div>
               <div className="col-12 mt-3">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary mx-2"
                   onClick={() => {
                     this.handleSaveHomelisting();
                   }}
                 >
                   Save
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    this.handleClearHomelisting();
+                  }}
+                >
+                  Clear
                 </button>
               </div>
             </div>
