@@ -4,4 +4,8 @@ const getAllCities = () => {
   return axios.get("/api/get-all-cities");
 };
 
-export { getAllCities };
+const saveHomelisting = (data) => {
+  return axios.post("/api/save-homelisting", data);
+};
+
+export { getAllCities, saveHomelisting };

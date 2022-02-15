@@ -13,6 +13,12 @@ class HomeListingRedux extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      price: "",
+      address: "",
+      description: "",
+      phoneNumber: "",
+      userId: "",
+      province: "",
       selectedOption: "",
       allCities: [],
     };
@@ -46,12 +52,53 @@ class HomeListingRedux extends Component {
     }
   }
 
+  handleSaveHomelisting = () => {
+    this.props.saveHomelisting({
+      price: this.state.price,
+      address: this.state.address,
+      description: this.state.description,
+      phoneNumber: this.state.phoneNumber,
+      userId: this.state.userId,
+      cityId: this.state.selectedOption.value,
+    });
+  };
+
   handleOnChangeImage = () => {};
 
   openPreviewImage = () => {};
 
   handleChangeSelect = async (selectedOption) => {
     this.setState({ selectedOption });
+  };
+
+  handleOnChangeAddress = (e) => {
+    this.setState({
+      address: e.target.value,
+    });
+  };
+
+  handleOnChangeProvince = (e) => {
+    this.setState({
+      province: e.target.value,
+    });
+  };
+
+  handleOnChangePhoneNumber = (e) => {
+    this.setState({
+      phoneNumber: e.target.value,
+    });
+  };
+
+  handleOnChangePrice = (e) => {
+    this.setState({
+      price: e.target.value,
+    });
+  };
+
+  handleOnChangeDescription = (e) => {
+    this.setState({
+      description: e.target.value,
+    });
   };
 
   render() {
@@ -64,7 +111,14 @@ class HomeListingRedux extends Component {
             <div className="row">
               <div className="col-6 mt-3">
                 <label>Address</label>
-                <input className="form-control" type="text"></input>
+                <input
+                  className="form-control"
+                  type="text"
+                  onChange={(e) => {
+                    this.handleOnChangeAddress(e);
+                  }}
+                  value={this.state.address}
+                ></input>
               </div>
               <div className="col-3 mt-3">
                 <label>City</label>
@@ -76,19 +130,47 @@ class HomeListingRedux extends Component {
               </div>
               <div className="col-3 mt-3">
                 <label>Province</label>
-                <input className="form-control" type="text"></input>
+                <input
+                  className="form-control"
+                  type="text"
+                  onChange={(e) => {
+                    this.handleOnChangeProvince(e);
+                  }}
+                  value={this.state.province}
+                ></input>
               </div>
               <div className="col-4 mt-3">
                 <label>Phone Number</label>
-                <input className="form-control" type="tel"></input>
+                <input
+                  className="form-control"
+                  type="tel"
+                  onChange={(e) => {
+                    this.handleOnChangePhoneNumber(e);
+                  }}
+                  value={this.state.phoneNumber}
+                ></input>
               </div>
               <div className="col-4 mt-3">
                 <label>Price</label>
-                <input className="form-control" type="text"></input>
+                <input
+                  className="form-control"
+                  type="text"
+                  onChange={(e) => {
+                    this.handleOnChangePrice(e);
+                  }}
+                  value={this.state.price}
+                ></input>
               </div>
               <div className="col-6 mt-3">
                 <label>Description</label>
-                <textarea className="form-control" rows="6"></textarea>
+                <textarea
+                  className="form-control"
+                  rows="6"
+                  onChange={(e) => {
+                    this.handleOnChangeDescription(e);
+                  }}
+                  value={this.state.description}
+                ></textarea>
               </div>
               <div className="col-6 mt-3">
                 <label>Image</label>
@@ -116,7 +198,14 @@ class HomeListingRedux extends Component {
                 </div>
               </div>
               <div className="col-12 mt-3">
-                <button className="btn btn-primary">Save</button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    this.handleSaveHomelisting();
+                  }}
+                >
+                  Save
+                </button>
               </div>
             </div>
           </div>
@@ -140,7 +229,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllCities: () => dispatch(actions.fetchAllCities()),
-    // getTitleStart: () => dispatch(actions.fetchTitleStart()),
+    saveHomelisting: (data) => dispatch(actions.saveHomelistingAction(data)),
     // getRoleStart: () => dispatch(actions.fetchRoleStart()),
     // createNewUser: (data) => dispatch(actions.createNewUser(data)),
     // fetchHomeListing: () => dispatch(actions.fetchAllUsersStart()),
