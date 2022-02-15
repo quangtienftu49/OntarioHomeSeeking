@@ -54,6 +54,8 @@ class HomeListingRedux extends Component {
   }
 
   handleClearHomelisting = () => {
+    let dataSelect = this.buildDataInputSelect(this.props.allCities);
+
     this.setState({
       price: "",
       address: "",
@@ -61,7 +63,7 @@ class HomeListingRedux extends Component {
       phoneNumber: "",
       userId: "",
       province: "",
-      allCities: [],
+      allCities: dataSelect && dataSelect.length > 0 ? dataSelect : [],
       selectedOption: "",
     });
   };
