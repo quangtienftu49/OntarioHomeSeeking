@@ -8,4 +8,8 @@ const saveHomelisting = (data) => {
   return axios.post("/api/save-homelisting", data);
 };
 
-export { getAllCities, saveHomelisting };
+const getAllHomelistings = (inputId) => {
+  return axios.get(`/api/get-all-homelistings?id=${inputId}`);
+};
+
+export { getAllCities, saveHomelisting, getAllHomelistings };

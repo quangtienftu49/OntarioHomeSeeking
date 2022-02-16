@@ -8,6 +8,7 @@ import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
 // import TableManageUser from "./TableManageUser";
 import Select from "react-select";
+import TableManageHomelisting from "./TableManageHomelisting";
 
 class HomeListingRedux extends Component {
   constructor(props) {
@@ -54,22 +55,41 @@ class HomeListingRedux extends Component {
         allCities: dataSelect,
       });
     }
+
+    if (prevProps.allHomelistings !== this.props.allHomelistings) {
+      let dataSelect = this.buildDataInputSelect(this.props.allCities);
+
+      this.setState({
+        price: "",
+        address: "",
+        description: "",
+        phoneNumber: "",
+        userId: "",
+        province: "",
+        allCities: dataSelect && dataSelect.length > 0 ? dataSelect : [],
+        selectedOption: "",
+        image: "",
+        previewImgUrl: "",
+      });
+    }
   }
 
-  handleClearHomelisting = () => {
-    let dataSelect = this.buildDataInputSelect(this.props.allCities);
+  // handleClearHomelisting = () => {
+  //   let dataSelect = this.buildDataInputSelect(this.props.allCities);
 
-    this.setState({
-      price: "",
-      address: "",
-      description: "",
-      phoneNumber: "",
-      userId: "",
-      province: "",
-      allCities: dataSelect && dataSelect.length > 0 ? dataSelect : [],
-      selectedOption: "",
-    });
-  };
+  //   this.setState({
+  //     price: "",
+  //     address: "",
+  //     description: "",
+  //     phoneNumber: "",
+  //     userId: "",
+  //     province: "",
+  //     allCities: dataSelect && dataSelect.length > 0 ? dataSelect : [],
+  //     selectedOption: "",
+  //     image: "",
+  //     previewImgUrl: "",
+  //   });
+  // };
 
   handleSaveHomelisting = () => {
     this.props.saveHomelisting({
@@ -81,6 +101,8 @@ class HomeListingRedux extends Component {
       cityId: this.state.selectedOption.value,
       image: this.state.image,
     });
+
+    // this.props.fetchAllHomelistings();
   };
 
   handleOnChangeImage = async (e) => {
@@ -230,14 +252,20 @@ class HomeListingRedux extends Component {
                 >
                   Save
                 </button>
-                <button
+                {/* <button
                   className="btn btn-primary"
                   onClick={() => {
                     this.handleClearHomelisting();
                   }}
                 >
                   Clear
-                </button>
+                </button> */}
+              </div>
+              <div className="col-12 my-5">
+                <TableManageHomelisting
+                // handleEditUserFromParent={this.handleEditUserFromParent}
+                // action={this.state.action}
+                />
               </div>
             </div>
           </div>
@@ -256,6 +284,7 @@ class HomeListingRedux extends Component {
 const mapStateToProps = (state) => {
   return {
     allCities: state.admin.allCities,
+    allHomelistings: state.admin.allHomelistings,
     // genderRedux: state.admin.genders,
     // titleRedux: state.admin.titles,
     // roleRedux: state.admin.roles,
@@ -268,7 +297,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllCities: () => dispatch(actions.fetchAllCities()),
     saveHomelisting: (data) => dispatch(actions.saveHomelistingAction(data)),
-    // getRoleStart: () => dispatch(actions.fetchRoleStart()),
+    fetchAllHomelistings: () => dispatch(actions.fetchAllHomelistings()),
     // createNewUser: (data) => dispatch(actions.createNewUser(data)),
     // fetchHomeListing: () => dispatch(actions.fetchAllUsersStart()),
     // editAHomeListing: (data) => dispatch(actions.editAUser(data)),
