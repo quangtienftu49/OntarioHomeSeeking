@@ -149,13 +149,18 @@ class HomeListingRedux extends Component {
   };
 
   handleEditHomelistingFromParent = (homelisting) => {
-    console.log("check edit user from parent", homelisting);
+    // console.log("check edit user from parent", homelisting);
 
     //parse buffer image to base64
     let imageBase64 = "";
     if (homelisting.image) {
       imageBase64 = new Buffer(homelisting.image, "base64").toString("binary");
     }
+
+    let allCities = this.buildDataInputSelect(this.props.allCities);
+    let editSelectedOption = allCities.find(
+      (item) => item.value === homelisting.cityId
+    );
 
     //auto fill inputs when clicking edit
     this.setState({
@@ -164,7 +169,7 @@ class HomeListingRedux extends Component {
       description: homelisting.description,
       phoneNumber: homelisting.phoneNumber,
       province: homelisting.province,
-      selectedOption: homelisting.cityId,
+      selectedOption: editSelectedOption,
       image: "",
       previewImgUrl: imageBase64,
       action: CRUD_ACTIONS.EDIT,
@@ -173,7 +178,7 @@ class HomeListingRedux extends Component {
   };
 
   render() {
-    console.log("check state", this.state);
+    // console.log("check state", this.state);
 
     let { price, address, description, phoneNumber, province } = this.state;
     return (
