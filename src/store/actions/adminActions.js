@@ -3,6 +3,7 @@ import {
   getAllCities,
   saveHomelisting,
   getAllHomelistings,
+  deleteHomelisting,
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -90,6 +91,33 @@ export const fetchAllHomelistings = () => {
       console.log("FETCH_ALL_HOMELISTING_FAILED", e);
       dispatch({
         type: actionTypes.FETCH_ALL_HOMELISTING_FAILED,
+      });
+    }
+  };
+};
+
+export const deleteHomelistingAction = (homelistingId) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await deleteHomelisting(homelistingId);
+      if (res && res.errCode === 0) {
+        toast.success("Delete the home listing successfully!");
+        dispatch({
+          type: actionTypes.DELETE_HOMELISTING_SUCCESS,
+        });
+        // auto add newly added homelisting to the table of all home listings
+        dispatch(fetchAllHomelistings());
+      } else {
+        toast.error("Cannot delete the home listing!");
+        dispatch({
+          type: actionTypes.DELETE_HOMELISTING_FAILED,
+        });
+      }
+    } catch (e) {
+      toast.error("Cannot delete the home listing!");
+      console.log("DELETE_HOMELISTING_FAILED", e);
+      dispatch({
+        type: actionTypes.DELETE_HOMELISTING_FAILED,
       });
     }
   };

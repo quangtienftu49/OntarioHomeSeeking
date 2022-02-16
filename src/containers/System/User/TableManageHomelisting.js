@@ -23,8 +23,9 @@ class TableManageHomelisting extends Component {
     }
   }
 
-  handleDeleteUser = (user) => {
-    // this.props.deleteAUserRedux(user.id);
+  handleDeleteHomelisting = (homelisting) => {
+    // console.log("check homelisting", homelisting);
+    this.props.deleteHomelistingAction(homelisting.id);
   };
 
   handleEditUser = (user) => {
@@ -80,7 +81,7 @@ class TableManageHomelisting extends Component {
                       <button
                         className="btn-delete"
                         onClick={() => {
-                          this.handleDeleteUser(item);
+                          this.handleDeleteHomelisting(item);
                         }}
                       >
                         <i className="fas fa-trash-alt"></i>
@@ -105,7 +106,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllHomelistings: () => dispatch(actions.fetchAllHomelistings()),
-    // deleteAUserRedux: (id) => dispatch(actions.deleteAUser(id)),
+    deleteHomelistingAction: (id) =>
+      dispatch(actions.deleteHomelistingAction(id)),
   };
 };
 

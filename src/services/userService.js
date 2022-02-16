@@ -12,4 +12,10 @@ const getAllHomelistings = (inputId) => {
   return axios.get(`/api/get-all-homelistings?id=${inputId}`);
 };
 
-export { getAllCities, saveHomelisting, getAllHomelistings };
+const deleteHomelisting = (homelistingId) => {
+  return axios.delete("/api/delete-homelisting", {
+    data: { id: homelistingId },
+  });
+};
+
+export { getAllCities, saveHomelisting, getAllHomelistings, deleteHomelisting };
