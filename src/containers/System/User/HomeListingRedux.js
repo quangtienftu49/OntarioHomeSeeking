@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { CommonUtils } from "../../../utils";
+import { CommonUtils, CRUD_ACTIONS } from "../../../utils";
 import * as actions from "../../../store/actions";
 import "./HomeListingRedux.scss";
 import Lightbox from "react-image-lightbox";
@@ -26,6 +26,8 @@ class HomeListingRedux extends Component {
       previewImgUrl: "",
       image: "",
       isOpen: false,
+      action: "",
+      homelistingEditId: "",
     };
   }
 
@@ -56,6 +58,7 @@ class HomeListingRedux extends Component {
       });
     }
 
+    //empty all inputs after saving data
     if (prevProps.allHomelistings !== this.props.allHomelistings) {
       let dataSelect = this.buildDataInputSelect(this.props.allCities);
 
@@ -70,37 +73,38 @@ class HomeListingRedux extends Component {
         selectedOption: "",
         image: "",
         previewImgUrl: "",
+        action: CRUD_ACTIONS.CREATE,
       });
     }
   }
 
-  // handleClearHomelisting = () => {
-  //   let dataSelect = this.buildDataInputSelect(this.props.allCities);
-
-  //   this.setState({
-  //     price: "",
-  //     address: "",
-  //     description: "",
-  //     phoneNumber: "",
-  //     userId: "",
-  //     province: "",
-  //     allCities: dataSelect && dataSelect.length > 0 ? dataSelect : [],
-  //     selectedOption: "",
-  //     image: "",
-  //     previewImgUrl: "",
-  //   });
-  // };
-
   handleSaveHomelisting = () => {
-    this.props.saveHomelisting({
-      price: this.state.price,
-      address: this.state.address,
-      description: this.state.description,
-      phoneNumber: this.state.phoneNumber,
-      userId: this.state.userId,
-      cityId: this.state.selectedOption.value,
-      image: this.state.image,
-    });
+    let { action } = this.state;
+
+    if (action === CRUD_ACTIONS.CREATE) {
+      this.props.saveHomelisting({
+        price: this.state.price,
+        address: this.state.address,
+        description: this.state.description,
+        phoneNumber: this.state.phoneNumber,
+        province: this.state.province,
+        userId: this.state.userId,
+        cityId: this.state.selectedOption.value,
+        image: this.state.image,
+      });
+    } else if (action === CRUD_ACTIONS.EDIT) {
+      this.props.editAHomelisting({
+        id: this.state.homelistingEditId,
+        price: this.state.price,
+        address: this.state.address,
+        description: this.state.description,
+        phoneNumber: this.state.phoneNumber,
+        province: this.state.province,
+        userId: this.state.userId,
+        cityId: this.state.selectedOption.value,
+        image: this.state.image,
+      });
+    }
 
     // this.props.fetchAllHomelistings();
   };
@@ -144,8 +148,32 @@ class HomeListingRedux extends Component {
     });
   };
 
+  handleEditHomelistingFromParent = (homelisting) => {
+    console.log("check edit user from parent", homelisting);
+
+    //parse buffer image to base64
+    let imageBase64 = "";
+    if (homelisting.image) {
+      imageBase64 = new Buffer(homelisting.image, "base64").toString("binary");
+    }
+
+    //auto fill inputs when clicking edit
+    this.setState({
+      price: homelisting.price,
+      address: homelisting.address,
+      description: homelisting.description,
+      phoneNumber: homelisting.phoneNumber,
+      province: homelisting.province,
+      selectedOption: homelisting.cityId,
+      image: "",
+      previewImgUrl: imageBase64,
+      action: CRUD_ACTIONS.EDIT,
+      homelistingEditId: homelisting.id,
+    });
+  };
+
   render() {
-    // console.log("check state", this.state);
+    console.log("check state", this.state);
 
     let { price, address, description, phoneNumber, province } = this.state;
     return (
@@ -245,26 +273,26 @@ class HomeListingRedux extends Component {
               </div>
               <div className="col-12 mt-3">
                 <button
-                  className="btn btn-primary mx-2"
+                  className={
+                    this.state.action === CRUD_ACTIONS.EDIT
+                      ? "btn btn-warning"
+                      : "btn btn-primary"
+                  }
                   onClick={() => {
                     this.handleSaveHomelisting();
                   }}
                 >
-                  Save
+                  {this.state.action === CRUD_ACTIONS.EDIT
+                    ? "Save changes"
+                    : "Create"}
                 </button>
-                {/* <button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    this.handleClearHomelisting();
-                  }}
-                >
-                  Clear
-                </button> */}
               </div>
               <div className="col-12 my-5">
                 <TableManageHomelisting
-                // handleEditUserFromParent={this.handleEditUserFromParent}
-                // action={this.state.action}
+                  handleEditHomelistingFromParent={
+                    this.handleEditHomelistingFromParent
+                  }
+                  action={this.state.action}
                 />
               </div>
             </div>
@@ -300,7 +328,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchAllHomelistings: () => dispatch(actions.fetchAllHomelistings()),
     // createNewUser: (data) => dispatch(actions.createNewUser(data)),
     // fetchHomeListing: () => dispatch(actions.fetchAllUsersStart()),
-    // editAHomeListing: (data) => dispatch(actions.editAUser(data)),
+    editAHomelisting: (data) => dispatch(actions.editAHomelisting(data)),
     // processLogout: () => dispatch(actions.processLogout()),
     // changeLanguageAppRedux: (language) =>
     // dispatch(actions.changeLanguageApp(language)),

@@ -4,6 +4,7 @@ import {
   saveHomelisting,
   getAllHomelistings,
   deleteHomelisting,
+  editHomelisting,
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -118,6 +119,33 @@ export const deleteHomelistingAction = (homelistingId) => {
       console.log("DELETE_HOMELISTING_FAILED", e);
       dispatch({
         type: actionTypes.DELETE_HOMELISTING_FAILED,
+      });
+    }
+  };
+};
+
+export const editAHomelisting = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await editHomelisting(data);
+      if (res && res.errCode === 0) {
+        toast.success("Update the home listing successfully!");
+        dispatch({
+          type: actionTypes.EDIT_HOMELISTING_SUCCESS,
+        });
+        // auto add newly added homelisting to the table of all home listings
+        dispatch(fetchAllHomelistings());
+      } else {
+        toast.error("Cannot update the home listing!");
+        dispatch({
+          type: actionTypes.EDIT_HOMELISTING_FAILED,
+        });
+      }
+    } catch (e) {
+      toast.error("Cannot update the home listing!");
+      console.log("EDIT_HOMELISTING_FAILED", e);
+      dispatch({
+        type: actionTypes.EDIT_HOMELISTING_FAILED,
       });
     }
   };

@@ -28,9 +28,9 @@ class TableManageHomelisting extends Component {
     this.props.deleteHomelistingAction(homelisting.id);
   };
 
-  handleEditUser = (user) => {
-    // console.log("check edit user ", user);
-    this.props.handleEditUserFromParent(user);
+  handleEditHomelisting = (homelisting) => {
+    this.props.handleEditHomelistingFromParent(homelisting);
+    // console.log("check edit homelisting ", homelisting);
   };
 
   render() {
@@ -65,7 +65,7 @@ class TableManageHomelisting extends Component {
                 return (
                   <tr key={index}>
                     <td>{item.address}</td>
-                    <td>{item.city}</td>
+                    <td>{item.cityId}</td>
                     <td>{item.phoneNumber}</td>
                     <td>{formatter.format(item.price)}</td>
                     <td>{item.description}</td>
@@ -73,7 +73,7 @@ class TableManageHomelisting extends Component {
                       <button
                         className="btn-edit"
                         onClick={() => {
-                          this.handleEditUser(item);
+                          this.handleEditHomelisting(item);
                         }}
                       >
                         <i className="fas fa-pencil-alt"></i>

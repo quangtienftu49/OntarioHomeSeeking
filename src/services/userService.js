@@ -18,4 +18,14 @@ const deleteHomelisting = (homelistingId) => {
   });
 };
 
-export { getAllCities, saveHomelisting, getAllHomelistings, deleteHomelisting };
+const editHomelisting = (data) => {
+  return axios.put("/api/edit-homelisting", data);
+};
+
+export {
+  getAllCities,
+  saveHomelisting,
+  getAllHomelistings,
+  deleteHomelisting,
+  editHomelisting,
+};
