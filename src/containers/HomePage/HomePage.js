@@ -66,6 +66,8 @@ class HomePage extends Component {
 
   render() {
     console.log("check state", this.state);
+    let { searchedData } = this.state;
+
     return (
       <>
         <HomeHeader />
@@ -83,16 +85,23 @@ class HomePage extends Component {
                 options={this.state.allCities}
               />
             </div>
+            {searchedData &&
+              searchedData.length > 0 &&
+              searchedData.map((item, index) => {
+                return (
+                  <div className="search-homelisting">
+                    <div className="search-top">
+                      <div className="search-address">
+                        Address: {item.address}, {item.cityId}
+                      </div>
+                      <div className="search-price">Price: {item.price}</div>
+                    </div>
+                    <div className="search-detail">Detail</div>
+                  </div>
+                );
+              })}
 
-            <div className="search-homelisting">
-              <div className="search-top">
-                <div className="search-address">
-                  Address: fasdfcrewwretewr eer
-                </div>
-                <div className="search-price">Price: 45143</div>
-              </div>
-              <div className="search-detail">Detail</div>
-              {/* <div
+            {/* <div
                 className="search-image"
                 style={{
                   backgroundImage: `url(${this.state.previewImgUrl})`,
@@ -102,7 +111,6 @@ class HomePage extends Component {
               <div className="search-address"></div>
               <div className="search-description"></div>
               <div className="search-phoneNumber"></div> */}
-            </div>
           </div>
         </div>
       </>
