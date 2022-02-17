@@ -60,7 +60,7 @@ class TableManageHomelisting extends Component {
   };
 
   render() {
-    console.log("check all homelistings: ", this.props.allHomelistings);
+    // console.log("check all homelistings: ", this.props.allHomelistings);
     // console.log("check state: ", this.state.homelistingRedux);
 
     let arrHomelistings = this.state.homelistingRedux;
