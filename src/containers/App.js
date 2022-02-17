@@ -55,15 +55,16 @@ class App extends Component {
                   exact
                   component={HomeListingRedux}
                 />
-                <Route
+                <Route path={path.HOMEPAGE} component={HomePage} />
+
+                {/* <Route
                   path={path.LOGIN}
                   component={userIsNotAuthenticated(Login)}
-                />
-                <Route path={path.HOMEPAGE} component={HomePage} />
-                <Route
+                /> */}
+                {/* <Route
                   path={path.SYSTEM}
                   component={userIsAuthenticated(System)}
-                />
+                /> */}
               </Switch>
             </span>
 

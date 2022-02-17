@@ -1,53 +1,58 @@
-.homepage {
-  background: #3cb6d3;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
+// .header {
+//   background: #3cb6d3;
+//   // height: 500px;
+//   display: flex;
+//   flex-direction: column;
 
-  .home-header-container {
-    height: 70px;
-    border: 1px solid red;
-    width: 100%;
+.home-header-container {
+  height: 8vh;
+  // border: 1px solid red;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #3cb6d3;
+  font-family: proxima-nova, sans-serif;
+
+  .home-header-content {
+    width: 60%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    background: #3cb6d3;
-    font-family: proxima-nova, sans-serif;
 
-    .home-header-content {
-      width: 60%;
-      height: 100%;
+    .left-content {
+      width: 40%;
       display: flex;
+      flex-direction: row;
       justify-content: center;
+      gap: 10px;
+      // margin: 15px 0;
+      align-items: center;
 
-      .left-content {
-        width: 40%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-        // margin: 15px 0;
-        align-items: center;
-
-        .logo-container {
-        }
-      }
-
-      .center-content {
-        width: 20%;
-      }
-
-      .right-content {
-        width: 40%;
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        margin: 15px 0;
+      .logo-container {
       }
     }
+
+    .center-content {
+      width: 20%;
+    }
+
+    .right-content {
+      width: 40%;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 15px 0;
+    }
   }
+}
+// }
+
+.homepage-container {
+  background: #3cb6d3;
 
   .home-header-banner {
-    height: 430px;
+    height: 92vh;
+    // background: #3cb6d3 !important;
     background: url("../../assets/banner/banner.svg") bottom repeat-x;
     background-size: 1280px;
 
@@ -55,9 +60,9 @@
       text-align: center;
       font-size: 35px;
       text-shadow: 1px 1px 1px #333;
-      margin-bottom: 10px;
+      padding-bottom: 20px;
       color: white;
-      margin-top: 30px;
+      padding-top: 50px;
     }
 
     .title2 {
@@ -74,7 +79,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 30px auto;
+      margin: 50px auto;
       padding: 10px;
       border-radius: 30px;
       background: #f7d800;

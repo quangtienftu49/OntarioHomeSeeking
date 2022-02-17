@@ -15,10 +15,10 @@ class System extends Component {
           <div className="system-list">
             <Switch>
               <Route path="/system/user-manage" component={UserManage} />
-              <Route
+              {/* <Route
                 path="/system/homelisting-redux"
                 component={HomeListingRedux}
-              />
+              /> */}
               <Route
                 component={() => {
                   return <Redirect to={systemMenuPath} />;

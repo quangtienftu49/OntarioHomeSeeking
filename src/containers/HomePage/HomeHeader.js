@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./HomeHeader.scss";
+import "./Homepage.scss";
 
 class HomeHeader extends Component {
   render() {
     return (
-      <div className="homepage">
+      <div className="header">
         <div className="home-header-container">
           <div className="home-header-content">
             <div className="left-content">
@@ -21,7 +21,7 @@ class HomeHeader extends Component {
             </div>
           </div>
         </div>
-        <div className="home-header-banner">
+        {/* <div className="home-header-banner">
           <div className="title1">LOOKING FOR NEW HOME?</div>
           <div className="title2">
             Thousands of apartments, houses, and condos for sale across Ontario
@@ -30,7 +30,7 @@ class HomeHeader extends Component {
             <i className="fas fa-search"></i>
             <input type="text" placeholder="Enter a city" />
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

@@ -9,6 +9,7 @@ import "react-image-lightbox/style.css"; // This only needs to be imported once 
 // import TableManageUser from "./TableManageUser";
 import Select from "react-select";
 import TableManageHomelisting from "./TableManageHomelisting";
+import HomeHeader from "../../HomePage/HomeHeader";
 
 class HomeListingRedux extends Component {
   constructor(props) {
@@ -182,134 +183,137 @@ class HomeListingRedux extends Component {
 
     let { price, address, description, phoneNumber, province } = this.state;
     return (
-      <div className="user-redux-container">
-        <div className="title">Create a home listing</div>
-        <div className="user-redux-body">
-          <div className="container">
-            <div className="row">
-              <div className="col-6 mt-3">
-                <label>Address</label>
-                <input
-                  type="address"
-                  className="form-control"
-                  value={address}
-                  onChange={(e) => {
-                    this.onChangeInput(e, "address");
-                  }}
-                ></input>
-              </div>
-              <div className="col-3 mt-3">
-                <label>City</label>
-                <Select
-                  value={this.state.selectedOption}
-                  onChange={this.handleChangeSelect}
-                  options={this.state.allCities}
-                />
-              </div>
-              <div className="col-3 mt-3">
-                <label>Province</label>
-                <input
-                  type="province"
-                  className="form-control"
-                  value={province}
-                  onChange={(e) => {
-                    this.onChangeInput(e, "province");
-                  }}
-                ></input>
-              </div>
-              <div className="col-4 mt-3">
-                <label>Phone Number</label>
-                <input
-                  type="phoneNumber"
-                  className="form-control"
-                  value={phoneNumber}
-                  onChange={(e) => {
-                    this.onChangeInput(e, "phoneNumber");
-                  }}
-                ></input>
-              </div>
-              <div className="col-4 mt-3">
-                <label>Price</label>
-                <input
-                  type="price"
-                  className="form-control"
-                  value={price}
-                  onChange={(e) => {
-                    this.onChangeInput(e, "price");
-                  }}
-                ></input>
-              </div>
-              <div className="col-6 mt-3">
-                <label>Description</label>
-                <textarea
-                  rows="6"
-                  type="description"
-                  className="form-control"
-                  value={description}
-                  onChange={(e) => {
-                    this.onChangeInput(e, "description");
-                  }}
-                ></textarea>
-              </div>
-              <div className="col-6 mt-3">
-                <label>Image</label>
-                <div className="preview-img-container">
+      <>
+        <HomeHeader />
+        <div className="user-redux-container">
+          <div className="title">Create a home listing</div>
+          <div className="user-redux-body">
+            <div className="container">
+              <div className="row">
+                <div className="col-6 mt-3">
+                  <label>Address</label>
                   <input
-                    hidden
-                    id="previewImg"
-                    type="file"
+                    type="address"
+                    className="form-control"
+                    value={address}
                     onChange={(e) => {
-                      this.handleOnChangeImage(e);
+                      this.onChangeInput(e, "address");
                     }}
                   ></input>
-                  <label className="label-upload" htmlFor="previewImg">
-                    Upload <i className="fas fa-cloud-upload-alt"></i>
-                  </label>
-                  <div
-                    className="preview-image"
-                    style={{
-                      backgroundImage: `url(${this.state.previewImgUrl})`,
-                    }}
-                    onClick={() => {
-                      this.openPreviewImage();
-                    }}
-                  ></div>
                 </div>
-              </div>
-              <div className="col-12 mt-3">
-                <button
-                  className={
-                    this.state.action === CRUD_ACTIONS.EDIT
-                      ? "btn btn-warning"
-                      : "btn btn-primary"
-                  }
-                  onClick={() => {
-                    this.handleSaveHomelisting();
-                  }}
-                >
-                  {this.state.action === CRUD_ACTIONS.EDIT
-                    ? "Save changes"
-                    : "Create"}
-                </button>
-              </div>
-              <div className="col-12 my-5">
-                <TableManageHomelisting
-                  handleEditHomelistingFromParent={
-                    this.handleEditHomelistingFromParent
-                  }
-                  action={this.state.action}
-                />
+                <div className="col-3 mt-3">
+                  <label>City</label>
+                  <Select
+                    value={this.state.selectedOption}
+                    onChange={this.handleChangeSelect}
+                    options={this.state.allCities}
+                  />
+                </div>
+                <div className="col-3 mt-3">
+                  <label>Province</label>
+                  <input
+                    type="province"
+                    className="form-control"
+                    value={province}
+                    onChange={(e) => {
+                      this.onChangeInput(e, "province");
+                    }}
+                  ></input>
+                </div>
+                <div className="col-4 mt-3">
+                  <label>Phone Number</label>
+                  <input
+                    type="phoneNumber"
+                    className="form-control"
+                    value={phoneNumber}
+                    onChange={(e) => {
+                      this.onChangeInput(e, "phoneNumber");
+                    }}
+                  ></input>
+                </div>
+                <div className="col-4 mt-3">
+                  <label>Price</label>
+                  <input
+                    type="price"
+                    className="form-control"
+                    value={price}
+                    onChange={(e) => {
+                      this.onChangeInput(e, "price");
+                    }}
+                  ></input>
+                </div>
+                <div className="col-6 mt-3">
+                  <label>Description</label>
+                  <textarea
+                    rows="6"
+                    type="description"
+                    className="form-control"
+                    value={description}
+                    onChange={(e) => {
+                      this.onChangeInput(e, "description");
+                    }}
+                  ></textarea>
+                </div>
+                <div className="col-6 mt-3">
+                  <label>Image</label>
+                  <div className="preview-img-container">
+                    <input
+                      hidden
+                      id="previewImg"
+                      type="file"
+                      onChange={(e) => {
+                        this.handleOnChangeImage(e);
+                      }}
+                    ></input>
+                    <label className="label-upload" htmlFor="previewImg">
+                      Upload <i className="fas fa-cloud-upload-alt"></i>
+                    </label>
+                    <div
+                      className="preview-image"
+                      style={{
+                        backgroundImage: `url(${this.state.previewImgUrl})`,
+                      }}
+                      onClick={() => {
+                        this.openPreviewImage();
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className="col-12 mt-3">
+                  <button
+                    className={
+                      this.state.action === CRUD_ACTIONS.EDIT
+                        ? "btn btn-warning"
+                        : "btn btn-primary"
+                    }
+                    onClick={() => {
+                      this.handleSaveHomelisting();
+                    }}
+                  >
+                    {this.state.action === CRUD_ACTIONS.EDIT
+                      ? "Save changes"
+                      : "Create"}
+                  </button>
+                </div>
+                <div className="col-12 my-5">
+                  <TableManageHomelisting
+                    handleEditHomelistingFromParent={
+                      this.handleEditHomelistingFromParent
+                    }
+                    action={this.state.action}
+                  />
+                </div>
               </div>
             </div>
           </div>
+          {this.state.isOpen === true && (
+            <Lightbox
+              mainSrc={this.state.previewImgUrl}
+              onCloseRequest={() => this.setState({ isOpen: false })}
+            />
+          )}
         </div>
-        {this.state.isOpen === true && (
-          <Lightbox
-            mainSrc={this.state.previewImgUrl}
-            onCloseRequest={() => this.setState({ isOpen: false })}
-          />
-        )}
-      </div>
+      </>
     );
   }
 }
