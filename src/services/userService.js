@@ -22,10 +22,15 @@ const editHomelisting = (data) => {
   return axios.put("/api/edit-homelisting", data);
 };
 
+const getHomelistingDetail = (inputId) => {
+  return axios.get(`/api/get-homelisting-by-cityId?id=${inputId}`);
+};
+
 export {
   getAllCities,
   saveHomelisting,
   getAllHomelistings,
   deleteHomelisting,
   editHomelisting,
+  getHomelistingDetail,
 };

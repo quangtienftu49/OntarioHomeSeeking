@@ -49,13 +49,13 @@ class App extends Component {
 
             <span className="content-container">
               <Switch>
-                <Route path={path.HOME} exact component={Home} />
+                {/* <Route path={path.HOME} exact component={Home} /> */}
                 <Route
                   path={path.HOMELISTINGS}
                   exact
                   component={HomeListingRedux}
                 />
-                <Route path={path.HOMEPAGE} component={HomePage} />
+                <Route path={path.HOME} component={HomePage} />
 
                 {/* <Route
                   path={path.LOGIN}

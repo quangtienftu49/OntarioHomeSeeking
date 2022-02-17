@@ -5,6 +5,7 @@ import {
   getAllHomelistings,
   deleteHomelisting,
   editHomelisting,
+  getHomelistingDetail,
 } from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -150,3 +151,29 @@ export const editAHomelisting = (data) => {
     }
   };
 };
+
+// export const getHomelistingDetailAction = (data) => {
+//   return async (dispatch, getState) => {
+//     try {
+//       let res = await getHomelistingDetail(data);
+//       // console.log("check res all doctors", res);
+//       if (res && res.errCode === 0) {
+//         // toast.success("Save a doctor detail infor successfully!");
+//         dispatch({
+//           type: actionTypes.GET_HOMELISTING_DETAIL_SUCCESS,
+//         });
+//       } else {
+//         // toast.error("Cannot create a doctor detail infor!");
+//         dispatch({
+//           type: actionTypes.GET_HOMELISTING_DETAIL_FAILED,
+//         });
+//       }
+//     } catch (e) {
+//       // toast.error("Cannot create a doctor detail infor!");
+//       console.log("GET_HOMELISTING_DETAIL_FAILED", e);
+//       dispatch({
+//         type: actionTypes.GET_HOMELISTING_DETAIL_FAILED,
+//       });
+//     }
+//   };
+// };

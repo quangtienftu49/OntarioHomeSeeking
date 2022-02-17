@@ -4,12 +4,20 @@ import HomeHeader from "./HomeHeader";
 import "./Homepage.scss";
 import Select from "react-select";
 import * as actions from "../../store/actions";
+import { getHomelistingDetail } from "../../services/userService";
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allCities: [],
+      selectedOption: "",
+      // price: "",
+      // address: "",
+      // description: "",
+      // phoneNumber: "",
+      // image: "",
+      searchedData: [],
     };
   }
 
@@ -43,9 +51,21 @@ class HomePage extends Component {
 
   handleChangeSelect = async (selectedOption) => {
     this.setState({ selectedOption });
+
+    let res = await getHomelistingDetail(selectedOption.value);
+    if (res && res.errCode === 0 && res.data) {
+      this.setState({
+        searchedData: res.data,
+      });
+    } else {
+      this.setState({
+        searchedData: [],
+      });
+    }
   };
 
   render() {
+    console.log("check state", this.state);
     return (
       <>
         <HomeHeader />
@@ -58,16 +78,24 @@ class HomePage extends Component {
             </div>
             <div className="col-6 search-select">
               <Select
-                // className="search-select"
                 value={this.state.selectedOption}
                 onChange={this.handleChangeSelect}
                 options={this.state.allCities}
               />
             </div>
-            {/* <div className="search-bar">
-              <i className="fas fa-search"></i>
-              <input type="text" placeholder="Enter a city" />
-            </div> */}
+
+            <div className="modal-homelisting">
+              <div
+                className="modal-image"
+                // style={{
+                //   backgroundImage: `url(${this.state.previewImgUrl})`,
+                // }}
+              ></div>
+              <div className="modal-price"></div>
+              <div className="modal-address"></div>
+              <div className="modal-description"></div>
+              <div className="modal-phoneNumber"></div>
+            </div>
           </div>
         </div>
       </>
