@@ -17,6 +17,7 @@ import Login from "../routes/Login";
 import Header from "./Header/Header";
 import System from "../routes/System";
 import HomePage from "./HomePage/HomePage";
+import HomeListingRedux from "./System/User/HomeListingRedux";
 
 import { CustomToastCloseButton } from "../components/CustomToast";
 
@@ -50,6 +51,11 @@ class App extends Component {
               <Switch>
                 <Route path={path.HOME} exact component={Home} />
                 <Route
+                  path={path.HOMELISTINGS}
+                  exact
+                  component={HomeListingRedux}
+                />
+                <Route
                   path={path.LOGIN}
                   component={userIsNotAuthenticated(Login)}
                 />
@@ -82,7 +88,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     started: state.app.started,
-    isLoggedIn: state.admin.isLoggedIn,
+    // isLoggedIn: state.admin.isLoggedIn,
   };
 };
 
