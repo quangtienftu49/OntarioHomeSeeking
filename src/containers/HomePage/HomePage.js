@@ -84,17 +84,24 @@ class HomePage extends Component {
               />
             </div>
 
-            <div className="modal-homelisting">
-              <div
-                className="modal-image"
-                // style={{
-                //   backgroundImage: `url(${this.state.previewImgUrl})`,
-                // }}
+            <div className="search-homelisting">
+              <div className="search-top">
+                <div className="search-address">
+                  Address: fasdfcrewwretewr eer
+                </div>
+                <div className="search-price">Price: 45143</div>
+              </div>
+              <div className="search-detail">Detail</div>
+              {/* <div
+                className="search-image"
+                style={{
+                  backgroundImage: `url(${this.state.previewImgUrl})`,
+                }}
               ></div>
-              <div className="modal-price"></div>
-              <div className="modal-address"></div>
-              <div className="modal-description"></div>
-              <div className="modal-phoneNumber"></div>
+              <div className="search-price"></div>
+              <div className="search-address"></div>
+              <div className="search-description"></div>
+              <div className="search-phoneNumber"></div> */}
             </div>
           </div>
         </div>

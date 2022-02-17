@@ -14,7 +14,7 @@ class HomeHeader extends Component {
               </div>
               {/* <div className="home-listing">Home Listing</div> */}
             </div>
-            <div className="center-content"></div>
+            {/* <div className="center-content"></div> */}
             <div className="right-content">
               <button className="login-btn">Login</button>
               <button className="post-for-free">Post for Free</button>
