@@ -48,11 +48,16 @@ class TableManageHomelisting extends Component {
     return result;
   };
 
-  // findCity = (item) => {
-  //   let allCities = this.buildDataInputSelect(this.props.allCities);
-  //   let city = allCities.find((city) => city.value === item.cityId);
-  //   let result = city.label;
-  // };
+  //function to return city when getting cityId
+  findCity = (item) => {
+    let allCities = this.buildDataInputSelect(this.props.allCities);
+    let city = allCities.find((city) => city.value === item.cityId);
+    let resultCity = "";
+    if (city && city.label) {
+      resultCity = city.label;
+    }
+    return resultCity;
+  };
 
   render() {
     console.log("check all homelistings: ", this.props.allHomelistings);
@@ -67,17 +72,13 @@ class TableManageHomelisting extends Component {
       maximumFractionDigits: 0,
     });
 
-    // let allCities = this.buildDataInputSelect(this.props.allCities);
-    // let city = allCities.find((city) => city.value === homelisting.cityId);
-    // let resultCity = city.label;
-
     return (
       <>
         <table className="TableManageHomelisting">
           <tbody>
             <tr>
               <th>Address</th>
-              {/* <th>City</th> */}
+              <th>City</th>
               <th>Phone Number</th>
               <th>Price</th>
               <th>Description</th>
@@ -87,14 +88,10 @@ class TableManageHomelisting extends Component {
             {arrHomelistings &&
               arrHomelistings.length > 0 &&
               arrHomelistings.map((item, index) => {
-                // let city = allCities.find(
-                //   (element) => element.value === item.cityId
-                // );
-                // let resultCity = city.label;
                 return (
                   <tr key={index}>
                     <td>{item.address}</td>
-                    {/* <td>{resultCity}</td> */}
+                    <td>{this.findCity(item)}</td>
                     <td>{item.phoneNumber}</td>
                     <td>{formatter.format(item.price)}</td>
                     <td>{item.description}</td>
@@ -129,7 +126,7 @@ class TableManageHomelisting extends Component {
 const mapStateToProps = (state) => {
   return {
     allHomelistings: state.admin.allHomelistings,
-    // allCities: state.admin.allCities,
+    allCities: state.admin.allCities,
   };
 };
 
@@ -138,7 +135,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchAllHomelistings: () => dispatch(actions.fetchAllHomelistings()),
     deleteHomelistingAction: (id) =>
       dispatch(actions.deleteHomelistingAction(id)),
-    // fetchAllCities: () => dispatch(actions.fetchAllCities()),
+    fetchAllCities: () => dispatch(actions.fetchAllCities()),
   };
 };
 
