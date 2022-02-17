@@ -12,7 +12,7 @@ class HomeHeader extends Component {
               <div className="logo-container">
                 <i class="fas fa-home">Ontario Home Seeking</i>
               </div>
-              <div className="home-listing">Home Listing</div>
+              {/* <div className="home-listing">Home Listing</div> */}
             </div>
             <div className="center-content"></div>
             <div className="right-content">
@@ -21,16 +21,6 @@ class HomeHeader extends Component {
             </div>
           </div>
         </div>
-        {/* <div className="home-header-banner">
-          <div className="title1">LOOKING FOR NEW HOME?</div>
-          <div className="title2">
-            Thousands of apartments, houses, and condos for sale across Ontario
-          </div>
-          <div className="search-bar">
-            <i className="fas fa-search"></i>
-            <input type="text" placeholder="Enter a city" />
-          </div>
-        </div> */}
       </div>
     );
   }

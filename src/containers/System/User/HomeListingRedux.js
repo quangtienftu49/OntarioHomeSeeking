@@ -322,11 +322,6 @@ const mapStateToProps = (state) => {
   return {
     allCities: state.admin.allCities,
     allHomelistings: state.admin.allHomelistings,
-    // genderRedux: state.admin.genders,
-    // titleRedux: state.admin.titles,
-    // roleRedux: state.admin.roles,
-    // isLoadingGender: state.admin.isLoadingGender,
-    // listUsers: state.admin.users,
   };
 };
 
@@ -335,12 +330,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchAllCities: () => dispatch(actions.fetchAllCities()),
     saveHomelisting: (data) => dispatch(actions.saveHomelistingAction(data)),
     fetchAllHomelistings: () => dispatch(actions.fetchAllHomelistings()),
-    // createNewUser: (data) => dispatch(actions.createNewUser(data)),
-    // fetchHomeListing: () => dispatch(actions.fetchAllUsersStart()),
     editAHomelisting: (data) => dispatch(actions.editAHomelisting(data)),
-    // processLogout: () => dispatch(actions.processLogout()),
-    // changeLanguageAppRedux: (language) =>
-    // dispatch(actions.changeLanguageApp(language)),
   };
 };
 

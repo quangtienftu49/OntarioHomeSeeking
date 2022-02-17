@@ -1,38 +1,39 @@
 .user-redux-container {
+  height: 862px;
   padding-top: 30px;
 
   .title {
     font-size: 25px;
   }
-}
 
-//css for preview image
-.preview-img-container {
-  .label-upload {
-    padding: 5px;
-    cursor: pointer;
-    background: #ddd;
-    border-radius: 5px;
+  //css for preview image
+  .preview-img-container {
+    .label-upload {
+      padding: 5px;
+      cursor: pointer;
+      background: #ddd;
+      border-radius: 5px;
 
-    &:hover {
-      background: orange;
+      &:hover {
+        background: orange;
+      }
+    }
+
+    .preview-image {
+      height: 100px;
+      width: 100%;
+      border: 1px solid #ddd;
+      background: center center no-repeat;
+      background-size: contain;
+      cursor: pointer;
     }
   }
 
-  .preview-image {
-    height: 100px;
-    width: 100%;
-    border: 1px solid #ddd;
-    background: center center no-repeat;
-    background-size: contain;
-    cursor: pointer;
+  .title {
+    color: #3cb6d3 !important;
   }
-}
 
-.title {
-  color: #3cb6d3 !important;
-}
-
-.btn {
-  border: none;
+  .btn {
+    border: none;
+  }
 }

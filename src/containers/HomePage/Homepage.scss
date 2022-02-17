@@ -5,7 +5,7 @@
 //   flex-direction: column;
 
 .home-header-container {
-  height: 8vh;
+  height: 75px;
   // border: 1px solid red;
   width: 100%;
   display: flex;
@@ -51,7 +51,7 @@
   background: #3cb6d3;
 
   .home-header-banner {
-    height: 92vh;
+    height: 862px;
     // background: #3cb6d3 !important;
     background: url("../../assets/banner/banner.svg") bottom repeat-x;
     background-size: 1280px;
@@ -72,31 +72,12 @@
       color: white;
       font-weight: 600;
     }
+  }
 
-    .search-bar {
-      text-align: center;
-      width: fit-content;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 50px auto;
-      padding: 10px;
-      border-radius: 30px;
-      background: #f7d800;
-      gap: 3px;
-
-      i {
-        margin: 0 5px;
-        font-size: 20px;
-      }
-
-      input {
-        height: 30px;
-        width: 320px;
-        background: transparent;
-        border: none;
-        outline: none;
-      }
-    }
+  .search-select {
+    padding-top: 40px;
+    margin: 0 auto;
+    width: 400px;
+    height: 60px;
   }
 }
