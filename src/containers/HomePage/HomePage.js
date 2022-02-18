@@ -109,7 +109,7 @@ class HomePage extends Component {
           {this.state.isOpenModalShowHomelisting && (
             <ModalHomelisting
               isOpen={this.state.isOpenModalShowHomelisting}
-              toggleFromParent={this.isOpenModalShowHomelisting}
+              toggleFromParent={this.toggleHomelistingModal}
               currentHomelisting={this.state.homelisting}
             />
           )}
