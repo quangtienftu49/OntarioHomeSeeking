@@ -5,6 +5,7 @@ import "./Homepage.scss";
 import Select from "react-select";
 import * as actions from "../../store/actions";
 import { getHomelistingDetail } from "../../services/userService";
+import ModalHomelisting from "../System/ModalHomelisting";
 
 class HomePage extends Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class HomePage extends Component {
       // phoneNumber: "",
       // image: "",
       searchedData: [],
+      homelisting: {},
+      isOpenModalShowHomelisting: false,
     };
   }
 
@@ -64,14 +67,52 @@ class HomePage extends Component {
     }
   };
 
+  //function to return city when getting cityId
+  findCity = (item) => {
+    let allCities = this.buildDataInputSelect(this.props.allCities);
+    let city = allCities.find((city) => city.value === item.cityId);
+    let resultCity = "";
+    if (city && city.label) {
+      resultCity = city.label;
+    }
+    return resultCity;
+  };
+
+  handleShowHomelistingDetail = (homelisting) => {
+    this.setState({
+      isOpenModalShowHomelisting: true,
+      homelisting: homelisting,
+    });
+  };
+
+  toggleHomelistingModal = () => {
+    this.setState({
+      isOpenModalShowHomelisting: !this.state.isOpenModalShowHomelisting,
+    });
+  };
+
   render() {
     console.log("check state", this.state);
     let { searchedData } = this.state;
+
+    // Create number formatter to currency
+    let formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    });
 
     return (
       <>
         <HomeHeader />
         <div className="homepage-container">
+          {this.state.isOpenModalShowHomelisting && (
+            <ModalHomelisting
+              isOpen={this.state.isOpenModalShowHomelisting}
+              toggleFromParent={this.isOpenModalShowHomelisting}
+              currentHomelisting={this.state.homelisting}
+            />
+          )}
           <div className="home-header-banner">
             <div className="title1">LOOKING FOR NEW HOME?</div>
             <div className="title2">
@@ -92,11 +133,23 @@ class HomePage extends Component {
                   <div className="search-homelisting">
                     <div className="search-top">
                       <div className="search-address">
-                        Address: {item.address}, {item.cityId}
+                        Address: {item.address}, {this.findCity(item)}
                       </div>
-                      <div className="search-price">Price: {item.price}</div>
+                      <div className="search-price">
+                        Price: {formatter.format(item.price)} per month
+                      </div>
                     </div>
-                    <div className="search-detail">Detail</div>
+                    <button
+                      className="btn-edit"
+                      onClick={() => {
+                        this.handleShowHomelistingDetail(item);
+                      }}
+                    >
+                      Detail
+                    </button>
+                    {/* <div className="search-detail">
+                      <strong>Detail</strong>
+                    </div> */}
                   </div>
                 );
               })}

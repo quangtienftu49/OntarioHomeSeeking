@@ -108,11 +108,10 @@
         }
 
         .search-price {
-          font-weight: 700;
         }
       }
 
-      .search-detail {
+      button {
         background: white;
         border-radius: 5px;
         width: 60px;
@@ -122,9 +121,12 @@
         align-items: center;
         margin: 10px 0;
         cursor: pointer;
+        color: red;
+        font-weight: 600;
 
         &:hover {
-          background-color: #3cb6d3;
+          background-color: #3cb6d3 !important;
+          color: white !important;
         }
       }
     }
