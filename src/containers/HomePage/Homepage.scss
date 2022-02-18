@@ -1,12 +1,5 @@
-// .header {
-//   background: #3cb6d3;
-//   // height: 500px;
-//   display: flex;
-//   flex-direction: column;
-
 .home-header-container {
   height: 75px;
-  // border: 1px solid red;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -44,6 +37,11 @@
         background: white !important;
         font-weight: 600;
         color: #3cb6d3;
+
+        &:hover {
+          background: orange !important;
+          color: white;
+        }
       }
 
       .post-for-free {
@@ -55,6 +53,11 @@
         font-weight: 600;
         color: #3cb6d3;
         cursor: pointer;
+
+        &:hover {
+          background: orange !important;
+          color: white;
+        }
       }
     }
   }
