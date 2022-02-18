@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import _ from "lodash"; //help check {} empty or not
 import "./ModalHomelisting.scss";
+import * as actions from "../../store/actions";
 
 class ModalHomelisting extends Component {
   constructor(props) {
@@ -14,11 +15,14 @@ class ModalHomelisting extends Component {
       phoneNumber: "",
       image: "",
       city: "",
+      allCities: [],
     };
   }
 
   //show current homelisting data in modal
   componentDidMount() {
+    this.props.fetchAllCities();
+
     let homelisting = this.props.currentHomelisting;
     if (homelisting && !_.isEmpty(homelisting)) {
       this.setState({
@@ -64,7 +68,14 @@ class ModalHomelisting extends Component {
   };
 
   render() {
-    console.log("check props from homepage: ", this.props);
+    console.log("check props from homepage: ", this.state);
+
+    let formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    });
+
     return (
       <Modal
         isOpen={this.props.isOpen}
@@ -79,8 +90,9 @@ class ModalHomelisting extends Component {
           toggle={() => {
             this.toggle();
           }}
+          className="modal-title"
         >
-          The home listing detail
+          HOME LISTING DETAIL
         </ModalHeader>
         <ModalBody>
           <div className="modal-homelisting-body">
@@ -92,11 +104,16 @@ class ModalHomelisting extends Component {
             ></div>
             <div className="detail">
               <div className="address">
-                Address: {this.state.address}, {this.state.city}
+                <strong>Address:</strong> {this.state.address},{" "}
+                {this.state.city}
               </div>
 
-              <div className="price">{this.state.price}</div>
-              <div className="description">{this.state.description}</div>
+              <div className="price">
+                <strong>Price:</strong> {formatter.format(this.state.price)}
+              </div>
+              <div className="description">
+                <strong>Description:</strong> {this.state.description}
+              </div>
             </div>
           </div>
         </ModalBody>
@@ -107,6 +124,7 @@ class ModalHomelisting extends Component {
             onClick={() => {
               this.toggle();
             }}
+            className="button"
           >
             Close
           </Button>
@@ -117,11 +135,11 @@ class ModalHomelisting extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return { allCities: state.admin.allCities };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return { fetchAllCities: () => dispatch(actions.fetchAllCities()) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalHomelisting);

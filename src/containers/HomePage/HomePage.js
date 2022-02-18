@@ -92,7 +92,7 @@ class HomePage extends Component {
   };
 
   render() {
-    console.log("check state", this.state);
+    // console.log("check state", this.state);
     let { searchedData } = this.state;
 
     // Create number formatter to currency
@@ -136,7 +136,7 @@ class HomePage extends Component {
                         Address: {item.address}, {this.findCity(item)}
                       </div>
                       <div className="search-price">
-                        Price: {formatter.format(item.price)} per month
+                        Price: {formatter.format(item.price)}
                       </div>
                     </div>
                     <button

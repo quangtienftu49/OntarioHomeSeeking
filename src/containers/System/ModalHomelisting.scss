@@ -1,0 +1,38 @@
+.modal-homelisting-container {
+  .modal-title {
+    color: #3cb6d3;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .button {
+    background-color: #3cb6d3;
+    border: none;
+
+    &:hover {
+      background: orange;
+    }
+  }
+
+  .modal-homelisting-body {
+    display: flex;
+    gap: 10px;
+    // flex-wrap: wrap;
+    flex-direction: row;
+
+    .image {
+      height: 400px;
+      width: 500px;
+      // border: 1px solid #ddd;
+      background: center center no-repeat;
+      background-size: contain;
+      cursor: pointer;
+    }
+
+    .detail {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}
