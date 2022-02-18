@@ -45,17 +45,17 @@ class App extends Component {
       <Fragment>
         <Router history={history}>
           <div className="main-container">
-            {this.props.isLoggedIn && <Header />}
+            {/* {this.props.isLoggedIn && <Header />} */}
 
-            <span className="content-container">
+            <div className="content-container">
               <Switch>
+                <Route path={path.HOMEPAGE} component={HomePage} exact />
                 {/* <Route path={path.HOME} exact component={Home} /> */}
                 <Route
                   path={path.HOMELISTINGS}
                   exact
                   component={HomeListingRedux}
                 />
-                <Route path={path.HOME} component={HomePage} />
 
                 {/* <Route
                   path={path.LOGIN}
@@ -66,7 +66,7 @@ class App extends Component {
                   component={userIsAuthenticated(System)}
                 /> */}
               </Switch>
-            </span>
+            </div>
 
             <ToastContainer
               position="bottom-right"
