@@ -49,7 +49,7 @@ class App extends Component {
 
             <div className="content-container">
               <Switch>
-                <Route path={path.HOMEPAGE} component={HomePage} exact />
+                <Route path={path.HOME} component={HomePage} exact />
                 {/* <Route path={path.HOME} exact component={Home} /> */}
                 <Route
                   path={path.HOMELISTINGS}

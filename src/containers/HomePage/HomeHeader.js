@@ -11,7 +11,7 @@ class HomeHeader extends Component {
   }
 
   returnHome() {
-    let path = `/homepage`;
+    let path = `/`;
     this.props.history.push(path);
   }
 
