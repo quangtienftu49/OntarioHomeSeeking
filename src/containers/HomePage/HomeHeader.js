@@ -2,13 +2,23 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Homepage.scss";
 import { withRouter } from "react-router";
+// import { withRouter } from "react-router-dom";
 
 class HomeHeader extends Component {
-  returnHome = () => {
-    if (this.props.history) {
-      this.props.history.push(`/homepage`);
-    }
-  };
+  constuctor() {
+    this.returnHome = this.returnHome.bind(this);
+    this.goToHomelisting = this.goToHomelisting.bind(this);
+  }
+
+  returnHome() {
+    let path = `/homepage`;
+    this.props.history.push(path);
+  }
+
+  goToHomelisting() {
+    let path = `/homelistings`;
+    this.props.history.push(path);
+  }
 
   render() {
     console.log("check props", this.props);
@@ -31,7 +41,14 @@ class HomeHeader extends Component {
             {/* <div className="center-content"></div> */}
             <div className="right-content">
               <button className="login-btn">Login</button>
-              <div className="post-for-free">Post for Free</div>
+              <div
+                className="post-for-free"
+                onClick={() => {
+                  this.goToHomelisting();
+                }}
+              >
+                Post for Free
+              </div>
             </div>
           </div>
         </div>
@@ -50,8 +67,8 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-// export default withRouter(
-//   connect(mapStateToProps, mapDispatchToProps)(HomeHeader)
-// );
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomeHeader)
+);
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+// export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
