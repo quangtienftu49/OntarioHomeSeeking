@@ -111,6 +111,9 @@ class ModalHomelisting extends Component {
               <div className="price">
                 <strong>Price:</strong> {formatter.format(this.state.price)}
               </div>
+              <div className="phoneNumber">
+                <strong>Contact:</strong> {this.state.phoneNumber}
+              </div>
               <div className="description">
                 <strong>Description:</strong> {this.state.description}
               </div>
