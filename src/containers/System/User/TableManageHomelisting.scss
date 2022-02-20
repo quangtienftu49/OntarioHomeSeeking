@@ -66,9 +66,12 @@
   .pagination-number {
     width: 20px;
     background-color: #3cb6d3;
-    color: white;
     cursor: pointer;
     display: flex;
     justify-content: center;
+
+    &.active {
+      background-color: orange;
+    }
   }
 }

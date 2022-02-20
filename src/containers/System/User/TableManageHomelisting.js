@@ -10,6 +10,7 @@ class TableManageHomelisting extends Component {
       homelistingRedux: [],
       currentPage: 1,
       homelistingsPerPage: 3,
+      paginationClicked: false,
     };
     this.handleClickPagination = this.handleClickPagination.bind(this);
   }
@@ -54,6 +55,7 @@ class TableManageHomelisting extends Component {
   handleClickPagination(e) {
     this.setState({
       currentPage: Number(e.target.id),
+      paginationClicked: true,
     });
   }
 
@@ -74,7 +76,7 @@ class TableManageHomelisting extends Component {
 
     let arrHomelistings = this.state.homelistingRedux;
 
-    let { currentPage, homelistingsPerPage } = this.state;
+    let { currentPage, homelistingsPerPage, paginationClicked } = this.state;
 
     // Get current homelistings
     const indexOfLastHomelisting = currentPage * homelistingsPerPage;
@@ -94,19 +96,6 @@ class TableManageHomelisting extends Component {
     ) {
       pageNumbers.push(i);
     }
-
-    // const renderPageNumbers = pageNumbers.map((number) => {
-    //   return (
-    //     <div
-    //       className="pagination-number"
-    //       key={number}
-    //       id={number}
-    //       onClick={this.handleClickPagination}
-    //     >
-    //       {number}
-    //     </div>
-    //   );
-    // });
 
     // Create number formatter to currency
     let formatter = new Intl.NumberFormat("en-US", {
@@ -165,10 +154,14 @@ class TableManageHomelisting extends Component {
           {pageNumbers.map((number) => {
             return (
               <div
-                className="pagination-number"
                 key={number}
                 id={number}
                 onClick={this.handleClickPagination}
+                className={
+                  currentPage === number
+                    ? "pagination-number active"
+                    : "pagination-number"
+                }
               >
                 {number}
               </div>
