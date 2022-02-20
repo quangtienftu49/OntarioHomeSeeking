@@ -8,7 +8,10 @@ class TableManageHomelisting extends Component {
     super(props);
     this.state = {
       homelistingRedux: [],
+      currentPage: 1,
+      homelistingsPerPage: 3,
     };
+    this.handleClickPagination = this.handleClickPagination.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +51,12 @@ class TableManageHomelisting extends Component {
     return result;
   };
 
+  handleClickPagination(e) {
+    this.setState({
+      currentPage: Number(e.target.id),
+    });
+  }
+
   //function to return city when getting cityId
   findCity = (item) => {
     let allCities = this.buildDataInputSelect(this.props.allCities);
@@ -61,9 +70,43 @@ class TableManageHomelisting extends Component {
 
   render() {
     // console.log("check all homelistings: ", this.props.allHomelistings);
-    // console.log("check state: ", this.state.homelistingRedux);
+    // console.log("check state: ", this.state);
 
     let arrHomelistings = this.state.homelistingRedux;
+
+    let { currentPage, homelistingsPerPage } = this.state;
+
+    // Get current homelistings
+    const indexOfLastHomelisting = currentPage * homelistingsPerPage;
+    const indexOfFirstHomelisting =
+      indexOfLastHomelisting - homelistingsPerPage;
+    const currentHomelistings = arrHomelistings.slice(
+      indexOfFirstHomelisting,
+      indexOfLastHomelisting
+    );
+
+    // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (
+      let i = 1;
+      i <= Math.ceil(arrHomelistings.length / homelistingsPerPage);
+      i++
+    ) {
+      pageNumbers.push(i);
+    }
+
+    // const renderPageNumbers = pageNumbers.map((number) => {
+    //   return (
+    //     <div
+    //       className="pagination-number"
+    //       key={number}
+    //       id={number}
+    //       onClick={this.handleClickPagination}
+    //     >
+    //       {number}
+    //     </div>
+    //   );
+    // });
 
     // Create number formatter to currency
     let formatter = new Intl.NumberFormat("en-US", {
@@ -85,9 +128,9 @@ class TableManageHomelisting extends Component {
               <th>Actions</th>
             </tr>
             {/* map through data to display on home listing table */}
-            {arrHomelistings &&
-              arrHomelistings.length > 0 &&
-              arrHomelistings.map((item, index) => {
+            {currentHomelistings &&
+              currentHomelistings.length > 0 &&
+              currentHomelistings.map((item, index) => {
                 return (
                   <tr key={index}>
                     <td>{item.address}</td>
@@ -118,6 +161,20 @@ class TableManageHomelisting extends Component {
               })}
           </tbody>
         </table>
+        <div className="pagination-number-container">
+          {pageNumbers.map((number) => {
+            return (
+              <div
+                className="pagination-number"
+                key={number}
+                id={number}
+                onClick={this.handleClickPagination}
+              >
+                {number}
+              </div>
+            );
+          })}
+        </div>
       </>
     );
   }
