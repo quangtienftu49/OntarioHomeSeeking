@@ -9,8 +9,7 @@ class TableManageHomelisting extends Component {
     this.state = {
       homelistingRedux: [],
       currentPage: 1,
-      homelistingsPerPage: 3,
-      paginationClicked: false,
+      homelistingsPerPage: 2,
     };
     this.handleClickPagination = this.handleClickPagination.bind(this);
   }
@@ -55,7 +54,6 @@ class TableManageHomelisting extends Component {
   handleClickPagination(e) {
     this.setState({
       currentPage: Number(e.target.id),
-      paginationClicked: true,
     });
   }
 
@@ -76,7 +74,7 @@ class TableManageHomelisting extends Component {
 
     let arrHomelistings = this.state.homelistingRedux;
 
-    let { currentPage, homelistingsPerPage, paginationClicked } = this.state;
+    let { currentPage, homelistingsPerPage } = this.state;
 
     // Get current homelistings
     const indexOfLastHomelisting = currentPage * homelistingsPerPage;
